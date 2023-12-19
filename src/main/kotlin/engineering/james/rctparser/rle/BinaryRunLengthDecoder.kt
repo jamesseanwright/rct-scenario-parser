@@ -10,7 +10,7 @@ fun decodeBinary(encoded: ByteArray): Result<ByteArray> {
 
         if (isEncodedRun) {
             val n = 1 - encoded[i].toInt()
-            return iterate(acc + ByteArray(n) { encoded[i + 1] }.asList(), i + 2)
+            return iterate(acc + List(n) { encoded[i + 1] }, i + 2)
         }
 
         val n = i + encoded[i].toInt() + 1
