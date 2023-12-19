@@ -1,6 +1,5 @@
 package engineering.james.rctparser.rle
 
-@ExperimentalUnsignedTypes
 class BinaryRunLengthDecoder : RunLengthDecoder {
     override fun decode(encoded: ByteArray): Result<ByteArray> {
         // TODO: refactor functionally
