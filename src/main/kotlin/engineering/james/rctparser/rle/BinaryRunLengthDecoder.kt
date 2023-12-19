@@ -2,20 +2,20 @@ package engineering.james.rctparser.rle
 
 fun decodeBinary(encoded: ByteArray): Result<ByteArray> {
     fun iterate(acc: List<Byte> = listOf<Byte>(), i: Int = 0): List<Byte> {
-        if (i == encoded.size) {
-            return acc
+        when {
+            i == encoded.size -> return acc
+            isEncodedRun(encoded[i]) -> {
+                val n = 1 - encoded[i].toInt()
+                return iterate(acc + List(n) { encoded[i + 1] }, i + 2)
+            }
+            else -> {
+                val n = i + encoded[i].toInt() + 1
+                return iterate(acc + encoded.slice(i + 1..n), n + 1)
+            }
         }
-
-        val isEncodedRun = encoded[i] < 0 // i.e. a signed byte with 1 as MSB
-
-        if (isEncodedRun) {
-            val n = 1 - encoded[i].toInt()
-            return iterate(acc + List(n) { encoded[i + 1] }, i + 2)
-        }
-
-        val n = i + encoded[i].toInt() + 1
-        return iterate(acc + encoded.slice(i + 1..n), n + 1)
     }
 
     return Result.success(iterate().toByteArray())
 }
+
+fun isEncodedRun(byte: Byte) = byte < 0 // i.e. MSB is 1
