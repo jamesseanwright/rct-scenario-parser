@@ -11,12 +11,8 @@ class BinaryRunLengthDecoder : RunLengthDecoder {
             val isEncodedRun = encoded[i] < 0 // i.e. a signed byte with 1 as MSB
 
             if (isEncodedRun) {
-                val n = 1 - encoded[i].toInt() + i + 1
-
-                for (j in i + 1 ..< n) {
-                    out.add(encoded[i + 1])
-                }
-
+                val n = 1 - encoded[i].toInt()
+                out.addAll(ByteArray(n) { encoded[i + 1] }.asList())
                 i += 2
             } else {
                 val n = i + encoded[i].toInt() + 1
