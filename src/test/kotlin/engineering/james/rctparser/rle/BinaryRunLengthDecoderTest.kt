@@ -33,8 +33,7 @@ class BinaryRunLengthDecoderTest {
 
                 val expectedData = "Good job!"
 
-                val decoder = BinaryRunLengthDecoder()
-                val actual = decoder.decode(encoded)
+                val actual = decodeBinary(encoded)
 
                 assertFalse(actual.isFailure)
                 assertContentEquals(expected, actual.getOrDefault(arrayOf<Byte>().toByteArray()))
