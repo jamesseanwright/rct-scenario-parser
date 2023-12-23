@@ -1,6 +1,5 @@
 package engineering.james.rctparser
 
-@ExperimentalUnsignedTypes
 interface ScenarioParser {
-    fun parse(decompressed: UByteArray): Result<Scenario>
+    fun parse(data: ByteArray): Result<Scenario>
 }
