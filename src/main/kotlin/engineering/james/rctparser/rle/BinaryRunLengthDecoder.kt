@@ -4,8 +4,6 @@ val checksumLength = 4
 
 fun decodeBinary(encoded: ByteArray): ByteArray {
     tailrec fun iterate(acc: List<Byte> = listOf<Byte>(), i: Int = 0): List<Byte> {
-        println("RLD BINARY $i")
-
         when {
             i == encoded.size - checksumLength -> return acc
             isEncodedRun(encoded[i]) -> {
