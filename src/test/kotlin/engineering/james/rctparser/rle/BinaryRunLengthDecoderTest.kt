@@ -3,7 +3,6 @@ package engineering.james.rctparser.rle
 import kotlin.test.Test
 import kotlin.test.assertContentEquals
 import kotlin.test.assertEquals
-import kotlin.test.assertFalse
 
 class BinaryRunLengthDecoderTest {
     @Test
@@ -14,8 +13,7 @@ class BinaryRunLengthDecoderTest {
         val expectedData = "Good job!"
         val actual = decodeBinary(encoded)
 
-        assertFalse(actual.isFailure)
-        assertContentEquals(expected, actual.getOrDefault(byteArrayOf()))
-        assertEquals(expectedData, actual.getOrDefault(byteArrayOf()).decodeToString())
+        assertContentEquals(expected, actual)
+        assertEquals(expectedData, actual.decodeToString())
     }
 }

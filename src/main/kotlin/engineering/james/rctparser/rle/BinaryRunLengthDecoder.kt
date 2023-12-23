@@ -1,6 +1,6 @@
 package engineering.james.rctparser.rle
 
-fun decodeBinary(encoded: ByteArray): Result<ByteArray> {
+fun decodeBinary(encoded: ByteArray): ByteArray {
     fun iterate(acc: List<Byte> = listOf<Byte>(), i: Int = 0): List<Byte> {
         when {
             i == encoded.size -> return acc
@@ -15,7 +15,7 @@ fun decodeBinary(encoded: ByteArray): Result<ByteArray> {
         }
     }
 
-    return Result.success(iterate().toByteArray())
+    return iterate().toByteArray()
 }
 
 fun isEncodedRun(byte: Byte) = byte < 0 // i.e. MSB is 1
