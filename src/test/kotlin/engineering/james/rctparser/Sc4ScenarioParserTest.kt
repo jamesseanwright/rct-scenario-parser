@@ -9,7 +9,7 @@ class Sc4ScenarioParserTest {
     private var scenarioData = byteArrayOf()
 
     init {
-        val stream = this::class.java.getResourceAsStream("/pcgw.sc4")
+        val stream = this::class.java.getResourceAsStream("/sc101.sc4")
         this.scenarioData = stream.readAllBytes()
     }
 
@@ -19,6 +19,6 @@ class Sc4ScenarioParserTest {
         val res = parser.parse(this.scenarioData)
 
         assertTrue(res.isSuccess)
-        assertEquals("PC Gaming World", res.getOrDefault(emptyScenario()).name)
+        assertEquals("Micro Dynamite Dunes", res.getOrDefault(emptyScenario()).name)
     }
 }

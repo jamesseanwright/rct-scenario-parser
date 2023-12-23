@@ -4,18 +4,20 @@ import java.math.BigDecimal
 
 typealias RunLengthDecoder = (ByteArray) -> ByteArray
 
-val parkNameOffset = 0x19882C..0x19882F
+val nameLocation = 0x1F8314..0x1F8351
 
 class Sc4ScenarioParser(val decode: RunLengthDecoder) : ScenarioParser {
         override fun parse(data: ByteArray): Result<Scenario> {
                 val decoded = decode(data)
-                val parkName =
-                                decoded.copyOfRange(parkNameOffset.first, parkNameOffset.last)
+                val name =
+                                decoded.slice(nameLocation)
+                                                .toByteArray()
                                                 .decodeToString()
+                                                .replace("\u0000", "")
 
                 return Result.success(
                                 Scenario(
-                                                parkName,
+                                                name,
                                                 BigDecimal(0),
                                                 BigDecimal(0),
                                                 0,
