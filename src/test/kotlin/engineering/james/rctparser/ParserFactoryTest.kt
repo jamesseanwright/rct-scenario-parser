@@ -15,4 +15,26 @@ class ParserFactoryTest {
                 "Parser is not an instance of Sc4ScenarioParser"
         )
     }
+
+    @Test
+    fun getScenarioParserWithSc6FileRejectsWithUnsupportedScenarioFormatException() {
+        val res = getScenarioParser("/foo/bar.sc6")
+
+        assertTrue(res.isFailure)
+        assertTrue(
+                res.exceptionOrNull() is UnsupportedScenarioFormatException,
+                "Throwable is not instance of UnsupportedScenarioFormatException"
+        )
+    }
+
+    @Test
+    fun getScenarioParserWithUnrecognisedFormatRejectsWithInvalidScenarioFormatException() {
+        val res = getScenarioParser("/foo/bar.foo")
+
+        assertTrue(res.isFailure)
+        assertTrue(
+                res.exceptionOrNull() is InvalidScenarioFormatException,
+                "Throwable is not instance of InvalidScenarioFormatException"
+        )
+    }
 }
