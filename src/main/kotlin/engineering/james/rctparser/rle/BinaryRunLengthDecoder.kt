@@ -1,9 +1,11 @@
 package engineering.james.rctparser.rle
 
+val checksumLength = 4
+
 fun decodeBinary(encoded: ByteArray): ByteArray {
-    fun iterate(acc: List<Byte> = listOf<Byte>(), i: Int = 0): List<Byte> {
+    tailrec fun iterate(acc: List<Byte> = listOf<Byte>(), i: Int = 0): List<Byte> {
         when {
-            i == encoded.size -> return acc
+            i == encoded.size - checksumLength -> return acc
             isEncodedRun(encoded[i]) -> {
                 val n = 1 - encoded[i].toInt()
                 return iterate(acc + List(n) { encoded[i + 1] }, i + 2)
