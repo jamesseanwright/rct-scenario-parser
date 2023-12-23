@@ -1,5 +1,6 @@
 package engineering.james.rctparser
 
+import java.io.File
 import kotlin.getOrThrow
 import kotlin.test.Test
 import kotlin.test.assertTrue
@@ -7,7 +8,7 @@ import kotlin.test.assertTrue
 class ParserFactoryTest {
     @Test
     fun getScenarioParserWithSc4FileReturnsSc4ScenarioParser() {
-        val res = getScenarioParser("/foo/bar.sc4")
+        val res = getScenarioParser(File("/foo/bar.sc4"))
 
         assertTrue(res.isSuccess)
         assertTrue(
@@ -18,7 +19,7 @@ class ParserFactoryTest {
 
     @Test
     fun getScenarioParserWithSc6FileRejectsWithUnsupportedScenarioFormatException() {
-        val res = getScenarioParser("/foo/bar.sc6")
+        val res = getScenarioParser(File("/foo/bar.sc6"))
 
         assertTrue(res.isFailure)
         assertTrue(
@@ -29,7 +30,7 @@ class ParserFactoryTest {
 
     @Test
     fun getScenarioParserWithUnrecognisedFormatRejectsWithInvalidScenarioFormatException() {
-        val res = getScenarioParser("/foo/bar.foo")
+        val res = getScenarioParser(File("/foo/bar.foo"))
 
         assertTrue(res.isFailure)
         assertTrue(

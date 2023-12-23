@@ -3,13 +3,30 @@
  */
 package engineering.james.rctparser
 
-class App {
-    val greeting: String
-        get() {
-            return "Hello World!"
-        }
-}
+import java.io.File
+import kotlin.system.exitProcess
 
-fun main() {
-    println(App().greeting)
+fun main(args: Array<String>) {
+    if (args.size == 0) {
+        System.err.println("Missing filename argument")
+        exitProcess(1)
+    }
+
+    val file = File(args[0])
+
+    val parser = getScenarioParser(file)
+
+    if (parser.isFailure) {
+        System.err.println(parser.exceptionOrNull()?.message)
+        exitProcess(1)
+    }
+
+    val scenario = parser.getOrThrow().parse(file.readBytes())
+
+    if (scenario.isFailure) {
+        System.err.println(scenario.exceptionOrNull()?.message)
+        exitProcess(2)
+    }
+
+    println(scenario)
 }
