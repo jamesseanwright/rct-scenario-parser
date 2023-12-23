@@ -22,14 +22,13 @@ data class Scenario(
         val guestIntensityPreference: GuestIntensityPreference,
 )
 
-fun emptyScenario(): Scenario {
-    return Scenario(
-            "",
-            BigDecimal(0),
-            BigDecimal(0),
-            0,
-            0,
-            ParkStatus.CLOSED,
-            GuestIntensityPreference.LOW,
-    )
-}
+val emptyScenario =
+        Scenario(
+                "",
+                BigDecimal(0),
+                BigDecimal(0),
+                0,
+                0,
+                ParkStatus.CLOSED,
+                GuestIntensityPreference.LOW,
+        )

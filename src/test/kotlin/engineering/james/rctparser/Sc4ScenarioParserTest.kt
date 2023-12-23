@@ -1,6 +1,7 @@
 package engineering.james.rctparser
 
 import engineering.james.rctparser.rle.decodeBinary
+import java.math.BigDecimal
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
@@ -19,6 +20,7 @@ class Sc4ScenarioParserTest {
         val res = parser.parse(this.scenarioData)
 
         assertTrue(res.isSuccess)
-        assertEquals("Micro Dynamite Dunes", res.getOrDefault(emptyScenario()).name)
+        assertEquals("Micro Dynamite Dunes", res.getOrDefault(emptyScenario).name)
+        assertEquals(BigDecimal(25000), res.getOrDefault(emptyScenario).availableCash)
     }
 }
