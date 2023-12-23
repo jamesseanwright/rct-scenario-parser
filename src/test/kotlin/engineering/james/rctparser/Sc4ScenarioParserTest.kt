@@ -1,5 +1,6 @@
 package engineering.james.rctparser
 
+import engineering.james.rctparser.rle.decodeBinary
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
@@ -14,7 +15,7 @@ class Sc4ScenarioParserTest {
 
     @Test
     fun parseSc4FormatScenario() {
-        val parser = Sc4ScenarioParser()
+        val parser = Sc4ScenarioParser(::decodeBinary)
         val res = parser.parse(this.scenarioData)
 
         assertTrue(res.isSuccess)
