@@ -12,6 +12,7 @@ class Sc4ScenarioParserTest {
 
     init {
         this.v1ScenarioData = this::class.java.getResourceAsStream("/sc101.sc4").readAllBytes()
+        this.v11ScenarioData = this::class.java.getResourceAsStream("/pcgw.sc4").readAllBytes()
     }
 
     @Test
@@ -32,6 +33,9 @@ class Sc4ScenarioParserTest {
         val res = parser.parse(this.v11ScenarioData)
 
         assertTrue(res.isFailure)
-        assertEquals(UnsupportedGameVersionException(), res.exceptionOrNull())
+        assertTrue(
+                res.exceptionOrNull() is UnsupportedGameVersionException,
+                "Throwable is not instance of UnsupportedGameVersionException"
+        )
     }
 }
