@@ -7,20 +7,31 @@ import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 
 class Sc4ScenarioParserTest {
-    private var scenarioData = byteArrayOf()
+    private var v1ScenarioData = byteArrayOf()
+    private var v11ScenarioData = byteArrayOf()
 
     init {
-        val stream = this::class.java.getResourceAsStream("/sc101.sc4")
-        this.scenarioData = stream.readAllBytes()
+        this.v1ScenarioData = this::class.java.getResourceAsStream("/sc101.sc4").readAllBytes()
     }
 
     @Test
     fun parseSc4FormatScenario() {
         val parser = Sc4ScenarioParser(::decodeBinary)
-        val res = parser.parse(this.scenarioData)
+        val res = parser.parse(this.v1ScenarioData)
 
         assertTrue(res.isSuccess)
         assertEquals("Micro Dynamite Dunes", res.getOrDefault(emptyScenario).name)
         assertEquals(BigDecimal(25000), res.getOrDefault(emptyScenario).availableCash)
+    }
+
+    // TODO: ultimately support scenarios created for expansion
+    // packs (see https://freerct.github.io/RCTTechDepot-Archive/SC4.html)
+    @Test
+    fun parseExpansionPackScenarioRejects() {
+        val parser = Sc4ScenarioParser(::decodeBinary)
+        val res = parser.parse(this.v11ScenarioData)
+
+        assertTrue(res.isFailure)
+        assertEquals(UnsupportedGameVersionException(), res.exceptionOrNull())
     }
 }
