@@ -23,18 +23,18 @@ class Sc4ScenarioParser(val decode: RunLengthDecoder) : ScenarioParser {
         val name = decoded.slice(nameLocation).toByteArray().decodeToString().replace("\u0000", "")
 
         val cash =
-                BigInteger(decoded.slice(cashLocation).reversed().toByteArray()) / 10.toBigInteger()
+            BigInteger(decoded.slice(cashLocation).reversed().toByteArray()) / 10.toBigInteger()
 
         return Result.success(
-                Scenario(
-                        name,
-                        cash.toBigDecimal(),
-                        BigDecimal(0),
-                        0,
-                        0,
-                        ParkStatus.CLOSED,
-                        GuestIntensityPreference.LOW,
-                )
+            Scenario(
+                name,
+                cash.toBigDecimal(),
+                BigDecimal(0),
+                0,
+                0,
+                ParkStatus.CLOSED,
+                GuestIntensityPreference.LOW,
+            )
         )
     }
 }

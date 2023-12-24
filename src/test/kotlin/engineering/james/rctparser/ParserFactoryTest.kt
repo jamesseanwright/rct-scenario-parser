@@ -12,8 +12,8 @@ class ParserFactoryTest {
 
         assertTrue(res.isSuccess)
         assertTrue(
-                res.getOrThrow() is Sc4ScenarioParser,
-                "Parser is not an instance of Sc4ScenarioParser"
+            res.getOrThrow() is Sc4ScenarioParser,
+            "Parser is not an instance of Sc4ScenarioParser"
         )
     }
 
@@ -23,8 +23,8 @@ class ParserFactoryTest {
 
         assertTrue(res.isFailure)
         assertTrue(
-                res.exceptionOrNull() is UnsupportedScenarioFormatException,
-                "Throwable is not instance of UnsupportedScenarioFormatException"
+            res.exceptionOrNull() is UnsupportedScenarioFormatException,
+            "Throwable is not instance of UnsupportedScenarioFormatException"
         )
     }
 
@@ -34,8 +34,8 @@ class ParserFactoryTest {
 
         assertTrue(res.isFailure)
         assertTrue(
-                res.exceptionOrNull() is InvalidScenarioFormatException,
-                "Throwable is not instance of InvalidScenarioFormatException"
+            res.exceptionOrNull() is InvalidScenarioFormatException,
+            "Throwable is not instance of InvalidScenarioFormatException"
         )
     }
 }

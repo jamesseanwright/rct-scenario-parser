@@ -35,8 +35,8 @@ class Sc4ScenarioParserTest {
 
         assertTrue(res.isFailure)
         assertTrue(
-                res.exceptionOrNull() is UnsupportedGameVersionException,
-                "Throwable is not instance of UnsupportedGameVersionException"
+            res.exceptionOrNull() is UnsupportedGameVersionException,
+            "Throwable is not instance of UnsupportedGameVersionException"
         )
     }
 }
