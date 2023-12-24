@@ -26,5 +26,3 @@ fun decodeBinary(encoded: ByteArray): ByteArray {
 
     return out.toByteArray()
 }
-
-fun isEncodedRun(byte: Byte) = byte < 0 // i.e. MSB is 1
